@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis Asignaturas - TaskU INACAP</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="header-left">
+                <h1>Mis Asignaturas</h1>
+                <p>Gestiona tus materias del semestre actual</p>
+            </div>
+            <div class="header-actions">
+                <button class="add-btn" onclick="showAddSubject()">+ Agregar Asignatura</button>
+                <a href="dashboard.html" class="back-btn">← Volver al Dashboard</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="semester-info">
+            <div class="semester-card">
+                <h2>Segundo Semestre 2025</h2>
+                <p>Ingeniería en Informática - 6 asignaturas activas</p>
+            </div>
+        </div>
+
+        <div class="subjects-grid" id="subjects-grid">
+            <div class="subject-card">
+                <div class="subject-header">
+                    <div class="subject-color integr"></div>
+                    <div class="subject-actions">
+                        <button class="action-btn" onclick="editSubject('integracion')">✎</button>
+                        <button class="action-btn delete" onclick="deleteSubject('integracion')">🗑</button>
+                    </div>
+                </div>
+                <div class="subject-content">
+                    <h3 class="subject-name">Integración de Proyecto</h3>
+                    <p class="subject-code">INF-401</p>
+                    <p class="subject-professor">Prof. Luis Pérez</p>
+                    <div class="subject-stats">
+                        <div class="stat">
+                            <span class="stat-number">3</span>
+                            <span class="stat-label">Tareas Pendientes</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">85%</span>
+                            <span class="stat-label">Progreso</span>
+                        </div>
+                    </div>
+                    <div class="subject-schedule">
+                        <span class="schedule-item">Lun 14:00-16:00</span>
+                        <span class="schedule-item">Mié 14:00-16:00</span>
+                    </div>
+                </div>
+                <div class="subject-footer">
+                    <button class="view-tasks-btn" onclick="viewSubjectTasks('integracion')">Ver Tareas</button>
+                </div>
+            </div>
+
+            <div class="subject-card">
+                <div class="subject-header">
+                    <div class="subject-color bd"></div>
+                    <div class="subject-actions">
+                        <button class="action-btn" onclick="editSubject('bd')">✎</button>
+                        <button class="action-btn delete" onclick="deleteSubject('bd')">🗑</button>
+                    </div>
+                </div>
+                <div class="subject-content">
+                    <h3 class="subject-name">Base de Datos</h3>
+                    <p class="subject-code">INF-301</p>
+                    <p class="subject-professor">Prof. María González</p>
+                    <div class="subject-stats">
+                        <div class="stat">
+                            <span class="stat-number">2</span>
+                            <span class="stat-label">Tareas Pendientes</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">78%</span>
+                            <span class="stat-label">Progreso</span>
+                        </div>
+                    </div>
+                    <div class="subject-schedule">
+                        <span class="schedule-item">Mar 10:00-12:00</span>
+                        <span class="schedule-item">Jue 10:00-12:00</span>
+                    </div>
+                </div>
+                <div class="subject-footer">
+                    <button class="view-tasks-btn" onclick="viewSubjectTasks('bd')">Ver Tareas</button>
+                </div>
+            </div>
+
+            <div class="subject-card">
+                <div class="subject-header">
+                    <div class="subject-color movil"></div>
+                    <div class="subject-actions">
+                        <button class="action-btn" onclick="editSubject('movil')">✎</button>
+                        <button class="action-btn delete" onclick="deleteSubject('movil')">🗑</button>
+                    </div>
+                </div>
+                <div class="subject-content">
+                    <h3 class="subject-name">Desarrollo Móvil</h3>
+                    <p class="subject-code">INF-302</p>
+                    <p class="subject-professor">Prof. Carlos Ramírez</p>
+                    <div class="subject-stats">
+                        <div class="stat">
+                            <span class="stat-number">4</span>
+                            <span class="stat-label">Tareas Pendientes</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">72%</span>
+                            <span class="stat-label">Progreso</span>
+                        </div>
+                    </div>
+                    <div class="subject-schedule">
+                        <span class="schedule-item">Lun 16:00-18:00</span>
+                        <span class="schedule-item">Vie 14:00-16:00</span>
+                    </div>
+                </div>
+                <div class="subject-footer">
+                    <button class="view-tasks-btn" onclick="viewSubjectTasks('movil')">Ver Tareas</button>
+                </div>
+            </div>
+
+            <div class="subject-card">
+                <div class="subject-header">
+                    <div class="subject-color seguridad"></div>
+                    <div class="subject-actions">
+                        <button class="action-btn" onclick="editSubject('seguridad')">✎</button>
+                        <button class="action-btn delete" onclick="deleteSubject('seguridad')">🗑</button>
+                    </div>
+                </div>
+                <div class="subject-content">
+                    <h3 class="subject-name">Seguridad de la Información</h3>
+                    <p class="subject-code">INF-303</p>
+                    <p class="subject-professor">Prof. Ana Torres</p>
+                    <div class="subject-stats">
+                        <div class="stat">
+                            <span class="stat-number">1</span>
+                            <span class="stat-label">Tareas Pendientes</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">92%</span>
+                            <span class="stat-label">Progreso</span>
+                        </div>
+                    </div>
+                    <div class="subject-schedule">
+                        <span class="schedule-item">Mar 14:00-16:00</span>
+                        <span class="schedule-item">Jue 16:00-18:00</span>
+                    </div>
+                </div>
+                <div class="subject-footer">
+                    <button class="view-tasks-btn" onclick="viewSubjectTasks('seguridad')">Ver Tareas</button>
+                </div>
+            </div>
+
+            <div class="subject-card">
+                <div class="subject-header">
+                    <div class="subject-color redes"></div>
+                    <div class="subject-actions">
+                        <button class="action-btn" onclick="editSubject('redes')">✎</button>
+                        <button class="action-btn delete" onclick="deleteSubject('redes')">🗑</button>
+                    </div>
+                </div>
+                <div class="subject-content">
+                    <h3 class="subject-name">Redes de Computadores</h3>
+                    <p class="subject-code">INF-304</p>
+                    <p class="subject-professor">Prof. Roberto Silva</p>
+                    <div class="subject-stats">
+                        <div class="stat">
+                            <span class="stat-number">2</span>
+                            <span class="stat-label">Tareas Pendientes</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">88%</span>
+                            <span class="stat-label">Progreso</span>
+                        </div>
+                    </div>
+                    <div class="subject-schedule">
+                        <span class="schedule-item">Mié 10:00-12:00</span>
+                        <span class="schedule-item">Vie 10:00-12:00</span>
+                    </div>
+                </div>
+                <div class="subject-footer">
+                    <button class="view-tasks-btn" onclick="viewSubjectTasks('redes')">Ver Tareas</button>
+                </div>
+            </div>
+
+            <div class="subject-card">
+                <div class="subject-header">
+                    <div class="subject-color algoritmos"></div>
+                    <div class="subject-actions">
+                        <button class="action-btn" onclick="editSubject('algoritmos')">✎</button>
+                        <button class="action-btn delete" onclick="deleteSubject('algoritmos')">🗑</button>
+                    </div>
+                </div>
+                <div class="subject-content">
+                    <h3 class="subject-name">Algoritmos y Estructuras</h3>
+                    <p class="subject-code">INF-305</p>
+                    <p class="subject-professor">Prof. Patricia López</p>
+                    <div class="subject-stats">
+                        <div class="stat">
+                            <span class="stat-number">0</span>
+                            <span class="stat-label">Tareas Pendientes</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-number">95%</span>
+                            <span class="stat-label">Progreso</span>
+                        </div>
+                    </div>
+                    <div class="subject-schedule">
+                        <span class="schedule-item">Lun 10:00-12:00</span>
+                        <span class="schedule-item">Vie 16:00-18:00</span>
+                    </div>
+                </div>
+                <div class="subject-footer">
+                    <button class="view-tasks-btn" onclick="viewSubjectTasks('algoritmos')">Ver Tareas</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para agregar/editar asignatura -->
+    <div class="modal-overlay" id="subject-modal" style="display: none;">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="modal-title">Agregar Nueva Asignatura</h3>
+                <button class="close-modal" onclick="closeModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <form id="subject-form">
+                    <div class="form-group">
+                        <label for="subject-name">Nombre de la Asignatura</label>
+                        <input type="text" id="subject-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject-code">Código</label>
+                        <input type="text" id="subject-code" placeholder="Ej: INF-401">
+                    </div>
+                    <div class="form-group">
+                        <label for="subject-professor">Profesor</label>
+                        <input type="text" id="subject-professor">
+                    </div>
+                    <div class="form-group">
+                        <label for="subject-color">Color</label>
+                        <select id="subject-color">
+                            <option value="integr">Azul</option>
+                            <option value="bd">Verde</option>
+                            <option value="movil">Naranja</option>
+                            <option value="seguridad">Rojo</option>
+                            <option value="redes">Púrpura</option>
+                            <option value="algoritmos">Amarillo</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" onclick="closeModal()">Cancelar</button>
+                <button class="btn btn-primary" onclick="saveSubject()">Guardar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script>
+        function showAddSubject() {
+            document.getElementById('modal-title').textContent = 'Agregar Nueva Asignatura';
+            document.getElementById('subject-form').reset();
+            document.getElementById('subject-modal').style.display = 'flex';
+        }
+
+        function editSubject(subjectId) {
+            document.getElementById('modal-title').textContent = 'Editar Asignatura';
+            // Aquí cargarías los datos de la asignatura
+            document.getElementById('subject-modal').style.display = 'flex';
+        }
+
+        function deleteSubject(subjectId) {
+            if (confirm('¿Estás seguro de que quieres eliminar esta asignatura?')) {
+                alert('Asignatura eliminada (funcionalidad en desarrollo)');
+            }
+        }
+
+        function closeModal() {
+            document.getElementById('subject-modal').style.display = 'none';
+        }
+
+        function saveSubject() {
+            const name = document.getElementById('subject-name').value;
+            if (name.trim()) {
+                alert('Asignatura guardada: ' + name);
+                closeModal();
+            } else {
+                alert('El nombre es obligatorio');
+            }
+        }
+
+        function viewSubjectTasks(subjectId) {
+            alert(`Viendo tareas de: ${subjectId}\n(Redireccionar a vista filtrada)`);
+        }
+
+        // Cerrar modal al hacer click fuera
+        document.getElementById('subject-modal').addEventListener('click', function(e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+    </script>
+</body>
+</html>

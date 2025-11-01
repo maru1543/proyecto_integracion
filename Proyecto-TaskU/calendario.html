@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calendario - TaskU INACAP</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="header">
+        <div class="header-content">
+            <div class="header-left">
+                <h1>Calendario Académico</h1>
+                <p>Visualiza todas tus tareas y fechas importantes</p>
+            </div>
+            <a href="dashboard.html" class="back-btn">← Volver al Dashboard</a>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="calendar-controls">
+            <div class="month-nav">
+                <button class="month-btn" onclick="previousMonth()">‹</button>
+                <div class="current-month" id="current-month">Septiembre 2025</div>
+                <button class="month-btn" onclick="nextMonth()">›</button>
+            </div>
+            <div class="view-options">
+                <button class="view-btn active">Mes</button>
+                <button class="view-btn">Semana</button>
+                <button class="view-btn">Día</button>
+            </div>
+        </div>
+
+        <div class="calendar-container">
+            <div class="calendar-main">
+                <div class="weekdays">
+                    <div class="weekday">Dom</div>
+                    <div class="weekday">Lun</div>
+                    <div class="weekday">Mar</div>
+                    <div class="weekday">Mié</div>
+                    <div class="weekday">Jue</div>
+                    <div class="weekday">Vie</div>
+                    <div class="weekday">Sáb</div>
+                </div>
+                <div class="calendar-grid" id="calendar-grid">
+                    <!-- Días del calendario se generan con JavaScript -->
+                </div>
+            </div>
+
+            <div class="calendar-sidebar">
+                <div class="upcoming-tasks">
+                    <div class="sidebar-header">Próximas Tareas</div>
+                    <div class="task-item">
+                        <div class="task-title">Entrega Proyecto Final</div>
+                        <div class="task-subject">Integración de Proyecto</div>
+                        <div class="task-date">Hoy, 23:59</div>
+                    </div>
+                    <div class="task-item">
+                        <div class="task-title">Parcial Base de Datos</div>
+                        <div class="task-subject">Base de Datos</div>
+                        <div class="task-date">Mañana, 08:00</div>
+                    </div>
+                    <div class="task-item">
+                        <div class="task-title">Lab React Native</div>
+                        <div class="task-subject">Desarrollo Móvil</div>
+                        <div class="task-date">18 Sep, 14:00</div>
+                    </div>
+                </div>
+
+                <div class="legend">
+                    <div class="legend-title">Leyenda de Prioridades</div>
+                    <div class="legend-item">
+                        <div class="legend-color alta"></div>
+                        <span>Prioridad Alta</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color media"></div>
+                        <span>Prioridad Media</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color baja"></div>
+                        <span>Prioridad Baja</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+    <script>
+        let currentDate = new Date();
+        let currentMonth = currentDate.getMonth();
+        let currentYear = currentDate.getFullYear();
+
+        const months = [
+            'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio',
+            'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'
+        ];
+
+        const tasks = [
+            { date: 15, title: 'Proyecto Final', priority: 'alta' },
+            { date: 16, title: 'Parcial BD', priority: 'alta' },
+            { date: 18, title: 'Lab React', priority: 'media' },
+            { date: 20, title: 'Ensayo', priority: 'baja' },
+            { date: 22, title: 'Presentación', priority: 'media' }
+        ];
+
+        function generateCalendar() {
+            const firstDay = new Date(currentYear, currentMonth, 1);
+            const lastDay = new Date(currentYear, currentMonth + 1, 0);
+            const firstDayOfWeek = firstDay.getDay();
+            const daysInMonth = lastDay.getDate();
+
+            document.getElementById('current-month').textContent = `${months[currentMonth]} ${currentYear}`;
+
+            const calendarGrid = document.getElementById('calendar-grid');
+            calendarGrid.innerHTML = '';
+
+            // Días del mes anterior
+            const prevMonth = new Date(currentYear, currentMonth, 0);
+            const daysInPrevMonth = prevMonth.getDate();
+
+            for (let i = firstDayOfWeek - 1; i >= 0; i--) {
+                const dayElement = createDayElement(daysInPrevMonth - i, true);
+                calendarGrid.appendChild(dayElement);
+            }
+
+            // Días del mes actual
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dayElement = createDayElement(day, false);
+                
+                // Marcar día actual
+                const today = new Date();
+                if (currentYear === today.getFullYear() && 
+                    currentMonth === today.getMonth() && 
+                    day === today.getDate()) {
+                    dayElement.classList.add('today');
+                }
+
+                // Agregar tareas
+                const dayTasks = tasks.filter(task => task.date === day);
+                dayTasks.forEach(task => {
+                    const eventElement = document.createElement('div');
+                    eventElement.className = `calendar-event ${task.priority}`;
+                    eventElement.textContent = task.title;
+                    dayElement.appendChild(eventElement);
+                });
+
+                calendarGrid.appendChild(dayElement);
+            }
+
+            // Días del mes siguiente
+            const cellsUsed = firstDayOfWeek + daysInMonth;
+            const remainingCells = 42 - cellsUsed;
+
+            for (let day = 1; day <= remainingCells; day++) {
+                const dayElement = createDayElement(day, true);
+                calendarGrid.appendChild(dayElement);
+            }
+        }
+
+        function createDayElement(day, isOtherMonth) {
+            const dayElement = document.createElement('div');
+            dayElement.className = 'calendar-day';
+            if (isOtherMonth) {
+                dayElement.classList.add('other-month');
+            }
+
+            const dayNumber = document.createElement('div');
+            dayNumber.className = 'day-number';
+            dayNumber.textContent = day;
+            dayElement.appendChild(dayNumber);
+
+            return dayElement;
+        }
+
+        function previousMonth() {
+            currentMonth--;
+            if (currentMonth < 0) {
+                currentMonth = 11;
+                currentYear--;
+            }
+            generateCalendar();
+        }
+
+        function nextMonth() {
+            currentMonth++;
+            if (currentMonth > 11) {
+                currentMonth = 0;
+                currentYear++;
+            }
+            generateCalendar();
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            generateCalendar();
+        });
+    </script>
+</body>
+</html>
